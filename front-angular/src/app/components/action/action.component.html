@@ -1,3 +1,10 @@
 <div id = "contentLeft">
-    <p>action works!</p>
+    <div class="operationBlockBig">
+        <div *ngFor="let operation of operations; index as i" class="operationBlock">
+            <label class = "operationName operationElement">{{operation.label}}</label>
+            <form class = "operationBlockPart">
+                <button type = "submit" class = "operationElement buttonElement">Zatwierdź</button>
+            </form>
+        </div>
+    </div>
 </div>

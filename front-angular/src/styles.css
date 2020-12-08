@@ -4,6 +4,7 @@
 
 body{
   text-align: center;
+  line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -11,8 +12,8 @@ body{
     /* --color-background: #303031; */
     --color-background: #282c34;
     --color-background-header: #0f0f0f;
-    --color-primary:#DF0101;
-    /*#FF0000*/
+    --color-primary:#DD0031;
+    /*#FF0000 #dd0031 #DF0101*/
     --color--secondary-text: #B0B3B8;
     --margin-primary: 10px;
     --margin-secondary: 5px;
@@ -26,13 +27,17 @@ body{
     float: left;
     min-width: 47%;
     text-align: center;
+    align-items: center;
   }
 
   #contentLeft{
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     float: left;
     min-width: 47%;
+    margin-bottom: 20px;
+    /* margin: var(--margin-primary); */
+    /* margin-top: 50px; */
   }
 
   #description{
@@ -43,8 +48,62 @@ body{
   
   #recordsInfo{
     color: var(--color-primary);
+    color: white;
     font-weight: 800;
     float: center;
     text-align: center;
     margin: 50px;
+    /* text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff; */
+  }
+
+  /* .app-logo{
+    width: 100%;
+    height: 40%;
+  } */
+
+  /* #operationBlockBig {
+    width: fit-content;
+  } */
+  
+  .operationName {
+    color: var(--color--secondary-text);
+  }
+  
+  .operationBlock {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: var(--margin-primary);
+    border: solid;
+    border-width: 0px;
+    border-bottom-width: 2px;
+    border-color: var(--color--secondary-text);
+    padding-bottom: 20px;
+  }
+  
+  .operationBlockPart {
+    display: inline;
+    /*margin-top: var(--margin-secondary);*/
+  }
+  
+  .operationElement {
+    border-radius: 5%;
+    margin: var(--margin-secondary);
+    min-height: 40px;
+    min-width: 60px;
+  }
+  
+  .inputElement {
+    min-width: 250px;
+    /*border-color: var(--color-primary) !important;*/
+  }
+  
+  .buttonElement {
+    color: var(--color-primary);
+    background-color: var(--color-background-header);
+    border-color: var(--color-background-header);
+    min-height: 40px;
+    text-align: center;
+    font-size: 14px;
   }
