@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {background-color: var(--color-background)}
+
+body{
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    /* --color-background: #303031; */
+    --color-background: #282c34;
+    --color-background-header: #0f0f0f;
+    --color-primary:#DF0101;
+    /*#FF0000*/
+    --color--secondary-text: #B0B3B8;
+    --margin-primary: 10px;
+    --margin-secondary: 5px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  #contentRight {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    min-width: 47%;
+    text-align: center;
+  }
+
+  #contentLeft{
+    display: flex;
+    flex-direction: column;
+    float: left;
+    min-width: 47%;
+  }
+
+  #description{
+    color: var(--color--secondary-text);
+    float: center;
+    text-align: center;
+  }
+  
+  #recordsInfo{
+    color: var(--color-primary);
+    font-weight: 800;
+    float: center;
+    text-align: center;
+    margin: 50px;
+  }
