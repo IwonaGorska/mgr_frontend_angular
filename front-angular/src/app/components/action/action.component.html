@@ -3,7 +3,18 @@
         <div *ngFor="let operation of operations; index as i" class="operationBlock">
             <label class = "operationName operationElement">{{operation.label}}</label>
             <form class = "operationBlockPart">
-                <button type = "submit" class = "operationElement buttonElement">Zatwierdź</button>
+                <div *ngIf="operation.dropdown.length">
+                  <mat-form-field appearance="fill" class="myMat">
+                    <mat-label *ngIf="!operation.amount" class="selectNumber myMat">Ile</mat-label>
+                    <mat-select class="selectNumber" [(ngModel)]="operation.amount" [ngModelOptions]="{standalone: true}">
+                      <mat-option *ngFor="let drop of operation.dropdown" [value]="drop">
+                        {{drop}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <input *ngIf="operation.isInput" type = "text" class = "operationElement inputElement" [(ngModel)]="operation.phrase" #ctrl="ngModel" [ngModelOptions]="{standalone: true}">
+                <button  class = "operationElement buttonElement" (click)="submit(i)">Zatwierdź</button>
             </form>
         </div>
     </div>
