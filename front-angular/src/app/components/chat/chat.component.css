@@ -1,0 +1,35 @@
+#content{
+    margin: 10px;
+    margin-top: 50px;
+    text-align: left !important;
+}
+
+#webSocketH{
+    color: var(--color--secondary-text);
+}
+
+.author{
+    color: var(--color-primary);
+}
+
+.message{
+    color: var(--color--secondary-text);
+}
+
+#createMsgBlock{
+    margin-top: 15px;
+}
+
+.textareaElement{
+    height: 33px;
+    min-height: 33px;
+    min-width: 250px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+/* .buttonElement {
+    float: left;
+} */
+

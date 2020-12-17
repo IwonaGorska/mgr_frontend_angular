@@ -1,0 +1,18 @@
+<div id="content">
+    <h1 id="webSocketH">
+        WebSockets Chat
+    </h1>
+    <div id="msgBlock" *ngFor="let message of messages">
+        <span class = "author">
+            {{message.author}}:
+        </span>
+        <span class = "message">
+            {{message.message}}
+        </span>
+    </div>
+    <div id="createMsgBlock">
+        <textarea class="textareaElement" [(ngModel)]="newMsg" [ngModelOptions]="{standalone: true}"></textarea>
+        <button class="buttonElement" (click)="sendMsg()">Send Message</button>
+    </div>
+</div>
+

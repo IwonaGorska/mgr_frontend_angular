@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './components/popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ChatComponent } from './components/chat/chat.component';
 // import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     InfoComponent,
     HomepageComponent,
     ActionComponent,
-    PopupComponent
+    PopupComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
