@@ -99,6 +99,7 @@ body{
     min-height: 40px;
     min-width: 60px;
     box-sizing: border-box;
+    float: left;
   }
   
   .inputElement {
@@ -116,6 +117,7 @@ body{
     text-align: center;
     font-size: 14px;
     font-family: inherit;
+    cursor:pointer;
   }
 
   .selectNumber{
@@ -127,6 +129,23 @@ body{
 
   .mat-form-field-flex{
     background-color: #FFFFFF !important;
+    padding: 0px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    height: 40px;
+    vertical-align: center;
+  }
+
+  .mat-form-field-infix{
+    border-top-width: 5px;
+  }
+
+  /* .mat-select-arrow-wrapper{
+    padding-top: 10%;
+  } */
+
+  .mat-form-field-ripple{
+    height: 0px !important;
   }
 
   .myMat{
@@ -145,6 +164,7 @@ body{
     padding-bottom: 5px !important;
     padding-left: 3px !important;
   } */
+
 
 html, body { height: 100%; }
 /* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
