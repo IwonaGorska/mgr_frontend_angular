@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { WebsocketService } from "../../services/websocket.service";
-import { ChatService } from "../../services/chat.service";
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css'],
-  providers: [WebsocketService, ChatService]
+  styleUrls: ['./chat.component.css']
 })
 
 export class ChatComponent implements OnInit {
@@ -52,6 +49,9 @@ export class ChatComponent implements OnInit {
 }
 
   sendMsg(){
+    if(!this.newMsg)
+      return;
+
     var message = {
       author: "Angular Client",
       message: this.newMsg
