@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   constructor( private route: ActivatedRoute, ) { }
 
   ngOnInit(): void {
-    console.log("URL = " + JSON.stringify(this.route.url));
+    // console.log("URL = " + JSON.stringify(this.route.url));
   }
 
 }

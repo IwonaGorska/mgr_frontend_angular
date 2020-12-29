@@ -31,6 +31,7 @@ export class ItemsServiceService {
   // }
 
   readonly contextUrl = 'http://localhost:8000';
+  readonly tableName = "/items";
 
   constructor(private http: HttpClient) {  
     // const httpOptions = this.options;
@@ -46,7 +47,7 @@ export class ItemsServiceService {
   // }
 
   getAll() {
-    return this.http.get(this.contextUrl + "/items");
+    return this.http.get(this.contextUrl + this.tableName);
   }
   /*
   this.http.put(`${environment.apiUrl}` + '/users/save/' + this.studentId,
@@ -69,27 +70,27 @@ export class ItemsServiceService {
   */
 
   get(id) {
-    return this.http.get(this.contextUrl + `/items/${id}`);
+    return this.http.get(this.contextUrl + this.tableName + `/${id}`);
   }
 
   create(data) {
-    return this.http.post(this.contextUrl + "/items", data);
+    return this.http.post(this.contextUrl + this.tableName, data);
   }
 
   update(id, data) {
-    return this.http.put(this.contextUrl + `/items/${id}`, data);
+    return this.http.put(this.contextUrl + this.tableName + `/${id}`, data);
   }
 
   delete(id) {
-    return this.http.delete(this.contextUrl + `/items/${id}`);
+    return this.http.delete(this.contextUrl + this.tableName + `/${id}`);
   }
 
   deleteAll() {
-    return this.http.delete(this.contextUrl + `/items`);
+    return this.http.delete(this.contextUrl + this.tableName);
   }
 
   findByName(name) {
-    return this.http.get(this.contextUrl + `/items?name=${name}`);
+    return this.http.get(this.contextUrl + this.tableName + `?name=${name}`);
   }
 
 }
