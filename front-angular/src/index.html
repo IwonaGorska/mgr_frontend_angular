@@ -11,5 +11,30 @@
 </head>
 <body class="mat-typography">
   <app-root></app-root>
+  <!-- <script src="./memoryHelper.js" ></script> -->
+  <!--It has to be done here, script tag in HTML because typescript doesn't accept memory object-->
+  <script>
+    // window.onload = function () {
+        if (!performance.memory) {
+        console.log("performance.memory() is not available.");
+        }
+        else{
+          console.log('performance.memory.usedJSHeapSize = ', performance.memory.usedJSHeapSize);
+          var tObject = {
+            framework: 2,
+            feature: 6,
+            score: performance.memory.usedJSHeapSize,
+            avg_of: 1
+          }
+
+          xmlhttp = new XMLHttpRequest();
+          var url = "http://localhost:8000/tests";
+          xmlhttp.open("POST", url, true);
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          xmlhttp.send(JSON.stringify(tObject));
+        }  
+    // }
+    // console.log('test', window.onload);
+  </script>
 </body>
 </html>

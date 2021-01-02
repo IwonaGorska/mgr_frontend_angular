@@ -25,7 +25,8 @@ export class ActionComponent implements OnInit {
     // this.phrase = "";
     // this.showPopup = false;
     // this.popupText = "Błędne dane";
-    this.beginTest();
+
+    this.beginTest(this);
   }
 
   ngOnInit(): void {
@@ -34,21 +35,28 @@ export class ActionComponent implements OnInit {
     this.getAllItems();
   }
 
-  beginTest(){
-    window.onload = function () {
-       console.log('start onload');
-       let time = window.performance.timing;
-       let pageloadtime = time.loadEventStart - time.navigationStart;
-       console.log('pageloadtime = ', pageloadtime);
+  beginTest(thisObject){ //need to pass this object because window makes it different
+    //or use arrow function to not loose 'this' scope
+    window.onload =  () => {
+      console.log('start onload');
+      let time = window.performance.timing;
+      let pageloadtime = time.loadEventStart - time.navigationStart;
+      console.log('pageloadtime = ', pageloadtime);
+      this.sendTestResult(5, pageloadtime, 1);
+    }
+    // window.onload = function () {
+    //    console.log('start onload');
+    //    let time = window.performance.timing;
+    //    let pageloadtime = time.loadEventStart - time.navigationStart;
+    //    console.log('pageloadtime = ', pageloadtime);
+    //    thisObject.sendTestResult(4, pageloadtime);
 
-       this.sendTestResult(4, pageloadtime);
-
-      //  if (!performance.memory) {
-      //     console.log("performance.memory() is not available.");
-      //     return;
-      //  }
-      //  console.log('performance.memory.usedJSHeapSize = ', performance.memory.usedJSHeapSize); 
-     }
+    //   //  if (!performance.memory) {
+    //   //     console.log("performance.memory() is not available.");
+    //   //     return;
+    //   //  }
+    //   //  console.log('performance.memory.usedJSHeapSize = ', performance.memory.usedJSHeapSize); 
+    //  }
  }
 
   operations = [
@@ -233,7 +241,7 @@ export class ActionComponent implements OnInit {
       let t1 = performance.now();
       console.log("Performance create item: ", (t1 - t0)/amount, 'milliseconds');
 
-      this.sendTestResult(1, (t1 - t0)/amount);
+      this.sendTestResult(1, (t1 - t0)/amount, amount);
 
     }
     
@@ -264,7 +272,7 @@ export class ActionComponent implements OnInit {
       let t1 = performance.now();
       console.log("Performance update item: ", (t1 - t0)/amount, 'milliseconds');
 
-      this.sendTestResult(2, (t1 - t0)/amount);
+      this.sendTestResult(2, (t1 - t0)/amount, amount);
     }
       
     // searchForItem(){
@@ -300,7 +308,7 @@ export class ActionComponent implements OnInit {
       let t1 = performance.now();
       console.log("Performance search for item: ", (t1 - t0)/amount, 'milliseconds');
     
-      this.sendTestResult(3, (t1 - t0)/amount);
+      this.sendTestResult(3, (t1 - t0)/amount, amount);
     }
     
     // deleteSingleItem(){
@@ -337,7 +345,7 @@ export class ActionComponent implements OnInit {
       let t1 = performance.now();
       console.log("Performance delete item: ", (t1 - t0)/amount, 'milliseconds');
 
-      this.sendTestResult(3, (t1 - t0)/amount);
+      this.sendTestResult(4, (t1 - t0)/amount, amount);
     }
 
     drawId(){
@@ -347,17 +355,18 @@ export class ActionComponent implements OnInit {
       var randomNr = Math.floor(Math.random() * max);
       //fetch item_id of this chosen item
       var id = this.items[randomNr].item_id;
-      console.log("Draw id = " + id);
+      // console.log("Draw id = " + id);
       return id;
     }
 
-    sendTestResult(feature, result){
+    sendTestResult(feature, result, avg_of){
       //UWAGA - TA FUNKCJA POWINNA BYC WYSLANA DOPIERO JAK UPLYNIE 
       //TEN CZAS, NIE OD RAZU LINIOWO...
       var tObject = {
         framework: 2,
         feature: feature,
-        score: result
+        score: result,
+        avg_of: avg_of
       }
       // console.log(JSON.stringify(tObject));
       this.tService.create(tObject)
