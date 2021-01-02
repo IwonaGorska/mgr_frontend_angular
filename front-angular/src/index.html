@@ -19,11 +19,12 @@
         console.log("performance.memory() is not available.");
         }
         else{
-          console.log('performance.memory.usedJSHeapSize = ', performance.memory.usedJSHeapSize);
+          var usedMemory = performance.memory.usedJSHeapSize/Math.pow(1000, 2);
+          console.log('performance.memory.usedJSHeapSize = ', usedMemory);
           var tObject = {
             framework: 2,
             feature: 6,
-            score: performance.memory.usedJSHeapSize,
+            score: usedMemory,
             avg_of: 1
           }
 
