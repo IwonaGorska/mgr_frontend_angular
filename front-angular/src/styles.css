@@ -118,6 +118,7 @@ body{
     font-size: 14px;
     font-family: inherit;
     cursor:pointer;
+    min-width: 80px;
   }
 
   .selectNumber{

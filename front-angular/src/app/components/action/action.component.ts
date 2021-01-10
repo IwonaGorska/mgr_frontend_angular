@@ -378,4 +378,65 @@ export class ActionComponent implements OnInit {
           }
         );
     }
+
+    success(position) {
+      console.log(position.coords.latitude);
+      console.log(position.coords.longitude);
+    }
+
+    error() {
+      console.log('error');
+    }
+
+    getLocation(){
+      let t0 = performance.now();
+      if(!navigator.geolocation) {
+        console.log('Geolocation is not supported by your browser');
+      } else {
+        console.log('Locating…');
+        navigator.geolocation.getCurrentPosition(this.success, this.error);
+      }
+      let t1 = performance.now();
+      console.log("Performance location: ", t1 - t0, 'milliseconds');
+    }
+
+    pushNotification(){
+      let t0 = performance.now();
+      // Let's check if the browser supports notifications
+      if (!("Notification" in window)) {
+        alert("This browser does not support desktop notification");
+      }
+
+      // Let's check whether notification permissions have already been granted
+      else if (Notification.permission === "granted") {
+        // If it's okay let's create a notification
+        var notification = new Notification("Hi there!");
+      }
+
+      // Otherwise, we need to ask the user for permission
+      else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(function (permission) {
+          // If the user accepts, let's create a notification
+          if (permission === "granted") {
+            var notification = new Notification("Hi there!");
+          }
+        });
+      }
+      let t1 = performance.now();
+      console.log("Performance notification: ", t1 - t0, 'milliseconds');
+    }
+
+    setLocalStorage(){
+      let t0 = performance.now();
+      localStorage.setItem('test', 'test');
+      let t1 = performance.now();
+      console.log("Performance set storage: ", t1 - t0, 'milliseconds');
+    }
+
+    searchLocalStorage(){
+      let t0 = performance.now();
+      console.log(localStorage.getItem('test'));
+      let t1 = performance.now();
+      console.log("Performance get storage: ", t1 - t0, 'milliseconds');
+    }
 }
