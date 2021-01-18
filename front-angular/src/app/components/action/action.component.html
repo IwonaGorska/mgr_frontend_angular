@@ -15,23 +15,11 @@
                 </div>
                 <input *ngIf="operation.isInput" type = "text" class = "operationElement inputElement" [(ngModel)]="operation.phrase" #ctrl="ngModel" [ngModelOptions]="{standalone: true}">
                 <button  class = "operationElement buttonElement" (click)="submit(i)">Zatwierdź</button>
+                <div *ngIf="i == 8" style="clear: both">
+                  <p id='imageTest'></p>
+                  <p id='sourceInfo' *ngIf='isImgLoaded'>Źródło: {{imgSource}}</p>
+                </div>
             </form>
         </div>
     </div>
-
-    <div>
-      <button (click)="getLocation()">
-        Location
-      </button>
-      <button (click)="pushNotification()">
-        pushNotification
-      </button>
-      <button (click)="setLocalStorage()">
-        setLocalStorage
-      </button>
-      <button (click)="searchLocalStorage()">
-        searchLocalStorage
-      </button>
-    </div>
-
 </div>

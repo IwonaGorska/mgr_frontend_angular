@@ -13,8 +13,9 @@
   <app-root></app-root>
   <!-- <script src="./memoryHelper.js" ></script> -->
   <!--It has to be done here, script tag in HTML because typescript doesn't accept memory object-->
-  <script>
-    // window.onload = function () {
+  <script type="text/javascript">
+    // window.onload = load;
+    // function load () {
         if (!performance.memory) {
         console.log("performance.memory() is not available.");
         }

@@ -168,6 +168,15 @@ body{
     margin-bottom: 10px;
   }
 
+  #sourceInfo{
+    font-size: 10px;
+  }
+
+  #imageTest{
+    text-align: left;
+    margin-left: 5px;
+  }
+
   /* .mat-form-field-wrapper .ng-tns-c36-0{
     padding-top: 2px !important;
     padding-bottom: 5px !important;

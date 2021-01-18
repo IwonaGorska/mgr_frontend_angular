@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { ItemsServiceService } from '../../services/items-service.service'
 import { TestsServiceService } from '../../services/tests-service.service'
-// import { Item } from '../../models/item.model'
 
 @Component({
   selector: 'app-action',
@@ -12,19 +11,16 @@ import { TestsServiceService } from '../../services/tests-service.service'
 })
 export class ActionComponent implements OnInit {
 
-  showPopup: Boolean = false;
+  showPopup: boolean = false;
   popupText: String =  "Błędne dane";
+  imgSource: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr-TG2bBh544dNz4bjTR11_4gtX66BHtXKMg&usqp=CAU';
+  isImgLoaded: Boolean = false;
   // items: Object = {};
   // items: Item[];
   // items: {};
   items: any;
-  // service = new ItemsServiceService(http);
 
   constructor(public dialog: MatDialog, private service: ItemsServiceService, private tService: TestsServiceService) { 
-    // this.amount = 0;
-    // this.phrase = "";
-    // this.showPopup = false;
-    // this.popupText = "Błędne dane";
 
     this.beginTest(this);
   }
@@ -60,13 +56,6 @@ export class ActionComponent implements OnInit {
  }
 
   operations = [
-      //  {
-      //     "label": "Tworzenie pojedynczego rekordu",
-      //     "isInput": true,
-      //     "dropdown": [],
-      //     "dropdownTitle": "",
-      //     "phrase": ""
-      //  },
        {
           "label": "Tworzenie rekordów",
           "isInput": true,
@@ -83,12 +72,6 @@ export class ActionComponent implements OnInit {
          "amount": 0,
          "phrase": ""
        },
-      //  {
-      //    "label": "Wyszukanie rekordu",
-      //    "isInput": false,
-      //    "dropdown": [],
-      //    "dropdownTitle": ""
-      //  },
       {
         "label": "Wyszukanie rekordów",
         "isInput": false,
@@ -97,19 +80,48 @@ export class ActionComponent implements OnInit {
         "amount": 0,
         "phrase": ""
       },
-      //  {
-      //    "label": "Usunięcie pojedynczego rekordu",
-      //    "isInput": false,
-      //    "dropdown": [],
-      //    "dropdownTitle": ""
-      //  },
-       {
-         "label": "Usunięcie rekordów",
-         "isInput": false,
-         "dropdown": [1, 10, 100, 1000],
-         "dropdownTitle": "Powtórzenia",
-         "amount": 0
-       }
+      {
+        "label": "Usunięcie rekordów",
+        "isInput": false,
+        "dropdown": [1, 10, 100, 1000],
+        "dropdownTitle": "Powtórzenia",
+        "amount": 0
+      },
+      {
+        "label": "Czytanie lokalizacji urządzenia",
+        "isInput": false,
+        "dropdown": [1, 10, 100, 1000],
+        "dropdownTitle": "Powtórzenia",
+        "amount": 0
+      },
+      {
+        "label": "Tworzenie Push Notification",
+        "isInput": true,
+        "dropdown": [1, 10, 100, 1000],
+        "dropdownTitle": "Powtórzenia",
+        "amount": 0
+      },
+      {
+        "label": "Umieszczanie danych w Local Storage",
+        "isInput": true,
+        "dropdown": [1, 10, 100, 1000],
+        "dropdownTitle": "Powtórzenia",
+        "amount": 0
+      },
+      {
+        "label": "Czytanie danych z Local Storage",
+        "isInput": true,
+        "dropdown": [1, 10, 100, 1000],
+        "dropdownTitle": "Powtórzenia",
+        "amount": 0
+      },
+      {
+        "label": "Ładowanie obrazu",
+        "isInput": false,
+        "dropdown": [1, 10, 100, 1000],
+        "dropdownTitle": "Powtórzenia",
+        "amount": 0
+      }
     ];
 
     togglePopup(text) {
@@ -128,43 +140,22 @@ export class ActionComponent implements OnInit {
       //I need to know during the validation, just now, the current items list
       //subscription will wait maybe 1 sec and then things can change, cause error
       var max = Object.keys(this.items).length;
-      // console.log(max);
-      //var max = 1;
       var isCorrect = true;
-      // if([1, 2, 5].includes(index) && !amount){
-      //   text += "Należy wybrać liczbę z listy. ";
-      //   isCorrect = false;
-      // }
-    
-      // if([2, 5].includes(index) && amount > max){
-      //   text += "Wybrana liczba jest większa niż aktualna liczba wszystkich rekordów. ";
-      //   isCorrect = false;
-      // }
-    
-      // if([0, 1, 2].includes(index) && !phrase){
-      //   text += "Pole tekstowe nie może być puste. ";
-      //   isCorrect = false;
-      // }
-      //or without this first condition
-  if([0, 1, 2, 3].includes(index) && amount === 0){ 
-    text += "Należy wybrać liczbę z listy. ";
-    isCorrect = false;
-  }
+      
+      if(amount === 0){ 
+        text += "Należy wybrać liczbę z listy. ";
+        isCorrect = false;
+      }
 
-  if([1, 3].includes(index) && amount > max){
-    text += "Wybrana liczba jest większa niż aktualna liczba wszstkich rekordów. ";
-    isCorrect = false;
-  }
+      if([1, 2, 3].includes(index) && amount > max){
+        text += "Wybrana liczba jest większa niż aktualna liczba wszstkich rekordów. ";
+        isCorrect = false;
+      }
 
-  if([2].includes(index) && max == 0){
-    text += "Aktualna liczba wszstkich rekordów jest równa 0. ";
-    isCorrect = false;
-  }
-
-  if([0, 1].includes(index) && !phrase){
-    text += "Pole tekstowe nie może być puste. ";
-    isCorrect = false;
-  }
+      if(this.operations[index].isInput && !phrase){
+        text += "Pole tekstowe nie może być puste. ";
+        isCorrect = false;
+      }
     
       if(!isCorrect){
         this.togglePopup(text);
@@ -181,13 +172,16 @@ export class ActionComponent implements OnInit {
         return;
       
         switch(index){
-          // case 0: this.createSingleItem(phrase); break;
           case 0: this.createItems(phrase, amount); break;
           case 1: this.updateItems(phrase, amount); break;
-          // case 3: this.searchForItem(); break;
           case 2: this.searchForItems(amount); break;
-          // case 5: this.deleteSingleItem(); break;
           case 3: this.deleteItems(amount); break;
+
+          case 4: this.getLocation(amount); break;
+          case 5: this.pushNotification(phrase, amount); break;
+          case 6: this.setLocalStorage(phrase, amount); break;
+          case 7: this.searchLocalStorage(phrase, amount); break;
+          case 8: this.addTheImage(amount); break;
           default: console.log("Uncorrect operation number");
         }
     }
@@ -204,22 +198,6 @@ export class ActionComponent implements OnInit {
         }
       );
    }
-
-    // createSingleItem(phrase){
-    //   console.log("Create single item");
-    //     var postObject = {
-    //         name: phrase
-    //     }
-    //     this.service.create(postObject)
-    //     .subscribe(
-    //       (data: any) => {
-    //         console.log('createSingleItem successful ', data);
-    //       },
-    //       error => {
-    //         console.log('createSingleItem error :(', error);
-    //       }
-    //     );
-    // }
       
     createItems(phrase, amount){
       console.log("Create many items");
@@ -274,21 +252,6 @@ export class ActionComponent implements OnInit {
 
       this.sendTestResult(2, (t1 - t0)/amount, amount);
     }
-      
-    // searchForItem(){
-    //   //wylosuj id
-    //   var id = this.drawId();
-    //   //zrob request z tym id
-    //   this.service.get(id)
-    //   .subscribe(
-    //     data => {
-    //       console.log("Found item = " + JSON.stringify(data));
-    //     },
-    //     error => {
-    //       console.log('searchForItem error :(', error);
-    //     }
-    //   );
-    // }
 
     searchForItems(amount){
       console.log("Search for items");
@@ -310,22 +273,6 @@ export class ActionComponent implements OnInit {
     
       this.sendTestResult(3, (t1 - t0)/amount, amount);
     }
-    
-    // deleteSingleItem(){
-    //   console.log("Delete single item");
-    //   //wylosuj id
-    //   var id = this.drawId();
-    //   //zrob request z tym id
-    //   this.service.delete(id)
-    //   .subscribe(
-    //     data => {
-    //       console.log(JSON.stringify(data));
-    //     },
-    //     error => {
-    //       console.log('deleteSingleItem error :(', error);
-    //     }
-    //   );
-    // }
     
     deleteItems(amount){
       console.log("Delete many items");
@@ -359,6 +306,102 @@ export class ActionComponent implements OnInit {
       return id;
     }
 
+    success(position) {
+      // console.log(position.coords.latitude);
+      // console.log(position.coords.longitude);
+    }
+    
+    error() {
+      console.log('Error while getting location');
+    }
+    
+    getLocation(amount){
+      if(!navigator.geolocation) {
+        console.log('Geolocation is not supported by your browser');
+      } else {
+        let t0 = performance.now();
+        for(let i = 0; i < amount; i++){
+          navigator.geolocation.getCurrentPosition(this.success, this.error);
+        }
+        // console.log('Locating…');
+        let t1 = performance.now();
+        this.sendTestResult(7, (t1 - t0)/amount, amount);//what if there was an error..
+        console.log("Performance location: ", (t1 - t0)/amount, 'milliseconds');
+      }
+    }
+    
+    pushNotification(phrase, amount){
+      // Let's check if the browser supports notifications
+      if (!("Notification" in window)) {
+        alert("This browser does not support desktop notification");
+      }
+    
+      // Let's check whether notification permissions have already been granted
+      else if (Notification.permission === "granted") {
+        // If it's okay let's create a notification
+        let t0 = performance.now();
+        for(let i = 0; i < amount; i++){
+          new Notification(phrase);
+        }
+        let t1 = performance.now();
+        this.sendTestResult(8, (t1 - t0)/amount, amount);
+        console.log("Performance notification: ", (t1 - t0)/amount, 'milliseconds');
+        // var notification = new Notification(phrase);
+      }
+    
+      // Otherwise, we need to ask the user for permission
+      else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(function (permission) {
+          // If the user accepts, let's create a notification
+          if (permission === "granted") {
+            let t0 = performance.now();
+            for(let i = 0; i < amount; i++){
+              new Notification(phrase);
+            }
+            let t1 = performance.now();
+            this.sendTestResult(8, (t1 - t0)/amount, amount);
+            console.log("Performance notification: ", (t1 - t0)/amount, 'milliseconds');
+          }
+        });
+      }
+    }
+    
+    setLocalStorage(phrase, amount){
+      let t0 = performance.now();
+      for(let i = 0; i < amount; i++){
+        localStorage.setItem(phrase, phrase);
+      }
+      let t1 = performance.now();
+      this.sendTestResult(9, (t1 - t0)/amount, amount);
+      console.log("Performance set storage: ", (t1 - t0)/amount, 'milliseconds');
+    }
+    
+    searchLocalStorage(phrase, amount){
+      let t0 = performance.now();
+      // console.log(localStorage.getItem(phrase));
+      for(let i = 0; i < amount; i++){
+        localStorage.getItem(phrase);
+      }
+      let t1 = performance.now();
+      this.sendTestResult(10, (t1 - t0)/amount, amount);
+      console.log("Performance get storage: ", (t1 - t0)/amount, 'milliseconds');
+      console.log(localStorage.getItem(phrase));
+    }
+
+    addTheImage(amount) { 
+      let t0 = performance.now();
+      for(let i = 0; i < amount; i++){
+        document.getElementById("imageTest").textContent = ''; //removing children from element to not collect many imgs
+        let img = document.createElement('img');
+        img.src = this.imgSource;
+        document.getElementById("imageTest").appendChild(img);
+      }
+      let t1 = performance.now();
+      this.sendTestResult(11, (t1 - t0)/amount, amount);
+      console.log("Performance load image: ", (t1 - t0)/amount, 'milliseconds');
+      this.isImgLoaded = true;
+    }
+
     sendTestResult(feature, result, avg_of){
       //UWAGA - TA FUNKCJA POWINNA BYC WYSLANA DOPIERO JAK UPLYNIE 
       //TEN CZAS, NIE OD RAZU LINIOWO...
@@ -377,66 +420,5 @@ export class ActionComponent implements OnInit {
             console.log('Performance test send result error :(', error);
           }
         );
-    }
-
-    success(position) {
-      console.log(position.coords.latitude);
-      console.log(position.coords.longitude);
-    }
-
-    error() {
-      console.log('error');
-    }
-
-    getLocation(){
-      let t0 = performance.now();
-      if(!navigator.geolocation) {
-        console.log('Geolocation is not supported by your browser');
-      } else {
-        console.log('Locating…');
-        navigator.geolocation.getCurrentPosition(this.success, this.error);
-      }
-      let t1 = performance.now();
-      console.log("Performance location: ", t1 - t0, 'milliseconds');
-    }
-
-    pushNotification(){
-      let t0 = performance.now();
-      // Let's check if the browser supports notifications
-      if (!("Notification" in window)) {
-        alert("This browser does not support desktop notification");
-      }
-
-      // Let's check whether notification permissions have already been granted
-      else if (Notification.permission === "granted") {
-        // If it's okay let's create a notification
-        var notification = new Notification("Hi there!");
-      }
-
-      // Otherwise, we need to ask the user for permission
-      else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(function (permission) {
-          // If the user accepts, let's create a notification
-          if (permission === "granted") {
-            var notification = new Notification("Hi there!");
-          }
-        });
-      }
-      let t1 = performance.now();
-      console.log("Performance notification: ", t1 - t0, 'milliseconds');
-    }
-
-    setLocalStorage(){
-      let t0 = performance.now();
-      localStorage.setItem('test', 'test');
-      let t1 = performance.now();
-      console.log("Performance set storage: ", t1 - t0, 'milliseconds');
-    }
-
-    searchLocalStorage(){
-      let t0 = performance.now();
-      console.log(localStorage.getItem('test'));
-      let t1 = performance.now();
-      console.log("Performance get storage: ", t1 - t0, 'milliseconds');
     }
 }
