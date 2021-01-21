@@ -201,26 +201,36 @@ export class ActionComponent implements OnInit {
       
     createItems(phrase, amount){
       console.log("Create many items");
-      let t0 = performance.now();
+      // let t0 = performance.now();
+      var sum = 0;
+      var responsesReceived = 0;
       for(let i = 0; i < amount; i++){//I tackle amount here not on server side to test the speed on front
         var postObject = {
           name: phrase
         }
+        let t0 = performance.now();
         this.service.create(postObject)
         .subscribe(
           data => {
             // console.log('createManyItems successful ', data);
+            let t1 = performance.now();
+            // console.log("Single response - create: ", t1 - t0, 'milliseconds');
+            sum += t1 - t0;
+            responsesReceived++;
+            // console.log(responsesReceived);
+            if(responsesReceived === amount){//if we have all the responses yet
+              console.log("Performance create item: ", sum/amount, 'milliseconds');
+              this.sendTestResult(1, sum/amount, amount);
+            }
           },
           error => {
             console.log('createManyItems error :(', error);
           }
         );
       }
-      let t1 = performance.now();
-      console.log("Performance create item: ", (t1 - t0)/amount, 'milliseconds');
-
-      this.sendTestResult(1, (t1 - t0)/amount, amount);
-
+      // let t1 = performance.now();
+      // console.log("Performance create item: ", (t1 - t0)/amount, 'milliseconds');
+      // this.sendTestResult(1, (t1 - t0)/amount, amount);
     }
     
     updateItems(phrase, amount){
@@ -231,68 +241,90 @@ export class ActionComponent implements OnInit {
       //z tego zapytania GET tez skorzystaj i bd trzeba je tu trzymac na froncie w arrayu i id z nich pobierac do 
       //kolejnych requestow uzytku
       console.log("Update many items");
-      let t0 = performance.now();
+      var sum = 0;
+      var responsesReceived = 0;
       var postObject = {
         name: phrase
       }
       for(let i = 0; i < amount; i++){
         var id = this.items[i].item_id;
+        let t0 = performance.now();
         this.service.update(id, postObject)
         .subscribe(
           data => {
             // console.log('updateManyItems successful ', data);
+            let t1 = performance.now();
+            // console.log("Single response - update: ", t1 - t0, 'milliseconds');
+            sum += t1 - t0;
+            responsesReceived++;
+            // console.log(responsesReceived);
+            if(responsesReceived === amount){//if we have all the responses yet
+              console.log("Performance update item: ", sum/amount, 'milliseconds');
+              this.sendTestResult(2, sum/amount, amount);
+            }
           },
           error => {
             console.log('updateManyItems error :(', error);
           }
         );
       }
-      let t1 = performance.now();
-      console.log("Performance update item: ", (t1 - t0)/amount, 'milliseconds');
-
-      this.sendTestResult(2, (t1 - t0)/amount, amount);
     }
 
     searchForItems(amount){
       console.log("Search for items");
-      let t0 = performance.now();
+      var sum = 0;
+      var responsesReceived = 0;
       for(let i = 0; i < amount; i++){//I tackle amount here not on server side to test the speed on front
         let id = this.drawId();
+        let t0 = performance.now();
         this.service.get(id)
         .subscribe(
           data => {
             // console.log("Found item = " + JSON.stringify(data));
+            let t1 = performance.now();
+            // console.log("Single response - search: ", t1 - t0, 'milliseconds');
+            sum += t1 - t0;
+            responsesReceived++;
+            // console.log(responsesReceived);
+            if(responsesReceived === amount){//if we have all the responses yet
+              console.log("Performance search item: ", sum/amount, 'milliseconds');
+              this.sendTestResult(3, sum/amount, amount);
+            }
           },
           error => {
             console.log('searchForItem error :(', error);
           }
         );
       }
-      let t1 = performance.now();
-      console.log("Performance search for item: ", (t1 - t0)/amount, 'milliseconds');
-    
-      this.sendTestResult(3, (t1 - t0)/amount, amount);
+
     }
     
     deleteItems(amount){
       console.log("Delete many items");
-      let t0 = performance.now();
+      var sum = 0;
+      var responsesReceived = 0;
       for(let i = 0; i < amount; i++){
         var id = this.items[i].item_id;
+        let t0 = performance.now();
         this.service.delete(id)
         .subscribe(
           data => {
             // console.log(JSON.stringify(data));
+            let t1 = performance.now();
+            // console.log("Single response - delete: ", t1 - t0, 'milliseconds');
+            sum += t1 - t0;
+            responsesReceived++;
+            // console.log(responsesReceived);
+            if(responsesReceived === amount){//if we have all the responses yet
+              console.log("Performance delete item: ", sum/amount, 'milliseconds');
+              this.sendTestResult(4, sum/amount, amount);
+            }
           },
           error => {
             console.log('deleteManyItems error :(', error);
           }
         );
       }
-      let t1 = performance.now();
-      console.log("Performance delete item: ", (t1 - t0)/amount, 'milliseconds');
-
-      this.sendTestResult(4, (t1 - t0)/amount, amount);
     }
 
     drawId(){
