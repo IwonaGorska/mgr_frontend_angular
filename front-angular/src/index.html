@@ -11,32 +11,45 @@
 </head>
 <body class="mat-typography">
   <app-root></app-root>
-  <!-- <script src="./memoryHelper.js" ></script> -->
-  <!--It has to be done here, script tag in HTML because typescript doesn't accept memory object-->
-  <script type="text/javascript">
-    // window.onload = load;
-    // function load () {
-        if (!performance.memory) {
+  <script language="JavaScript">
+    window.onload =  () => { 
+      var url = "http://localhost:8000/tests";
+
+      xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", url, true);
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+
+      console.log('start onload');
+      let time = window.performance.timing;
+      let pageloadtime = time.loadEventStart - time.navigationStart;
+      console.log('pageloadtime = ', pageloadtime);
+      var tTimeObject = {
+            framework: 2,
+            feature: 5,
+            score: pageloadtime,
+            avg_of: 1
+          }
+          xmlhttp.send(JSON.stringify(tTimeObject));
+
+      if (!performance.memory) {
         console.log("performance.memory() is not available.");
         }
         else{
           var usedMemory = performance.memory.usedJSHeapSize/Math.pow(1000, 2);
           console.log('performance.memory.usedJSHeapSize = ', usedMemory);
-          var tObject = {
+          var tMemoryObject = {
             framework: 2,
             feature: 6,
             score: usedMemory,
             avg_of: 1
           }
 
-          xmlhttp = new XMLHttpRequest();
-          var url = "http://localhost:8000/tests";
+          // xmlhttp = new XMLHttpRequest();
           xmlhttp.open("POST", url, true);
           xmlhttp.setRequestHeader("Content-type", "application/json");
-          xmlhttp.send(JSON.stringify(tObject));
+          xmlhttp.send(JSON.stringify(tMemoryObject));
         }  
-    // }
-    // console.log('test', window.onload);
+    }
   </script>
 </body>
 </html>

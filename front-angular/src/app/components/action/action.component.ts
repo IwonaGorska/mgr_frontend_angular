@@ -33,13 +33,17 @@ export class ActionComponent implements OnInit {
 
   beginTest(thisObject){ //need to pass this object because window makes it different
     //or use arrow function to not loose 'this' scope
-    window.onload =  () => {
-      console.log('start onload');
-      let time = window.performance.timing;
-      let pageloadtime = time.loadEventStart - time.navigationStart;
-      console.log('pageloadtime = ', pageloadtime);
-      this.sendTestResult(5, pageloadtime, 1);
-    }
+    // window.onload =  () => {
+    //   console.log('start onload');
+    //   let time = window.performance.timing;
+    //   let pageloadtime = time.loadEventStart - time.navigationStart;
+    //   console.log('pageloadtime = ', pageloadtime);
+    //   this.sendTestResult(5, pageloadtime, 1);
+    // }
+
+
+
+
     // window.onload = function () {
     //    console.log('start onload');
     //    let time = window.performance.timing;
