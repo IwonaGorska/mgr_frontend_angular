@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* * {background-color: var(--color-background)} */
-
 body{
   text-align: center;
   line-height: 1.5 !important;
@@ -32,14 +30,10 @@ body{
   }
 
   #contentLeft{
-    /* display: flex;
-    flex-direction: column; */
     float: left;
     min-width: 47%;
     margin-bottom: 20px;
     box-sizing: border-box;
-    /* margin: var(--margin-primary); */
-    /* margin-top: 50px; */
   }
 
   #description{
@@ -55,17 +49,7 @@ body{
     float: center;
     text-align: center;
     margin: 50px;
-    /* text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff; */
   }
-
-  /* .app-logo{
-    width: 100%;
-    height: 40%;
-  } */
-
-  /* #operationBlockBig {
-    width: fit-content;
-  } */
   
   .operationName {
     color: var(--color--secondary-text);
@@ -90,7 +74,6 @@ body{
     min-height: 51px;
     display: inline-block;
     vertical-align: middle;
-    /*margin-top: var(--margin-secondary);*/
   }
   
   .operationElement {
@@ -105,7 +88,6 @@ body{
   .inputElement {
     min-width: 250px;
     background-color: #FFFFFF;
-    /*border-color: var(--color-primary) !important;*/
   }
   
   .buttonElement {
@@ -141,10 +123,6 @@ body{
     border-top-width: 5px;
   }
 
-  /* .mat-select-arrow-wrapper{
-    padding-top: 10%;
-  } */
-
   .mat-form-field-ripple{
     height: 0px !important;
   }
@@ -177,12 +155,4 @@ body{
     margin-left: 5px;
   }
 
-  /* .mat-form-field-wrapper .ng-tns-c36-0{
-    padding-top: 2px !important;
-    padding-bottom: 5px !important;
-    padding-left: 3px !important;
-  } */
-
-
 html, body { height: 100%; }
-/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
