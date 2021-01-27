@@ -22,7 +22,7 @@ export class ActionComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private service: ItemsServiceService, private tService: TestsServiceService) { 
 
-    this.beginTest(this);
+    // this.beginTest(this);
   }
 
   ngOnInit(): void {
@@ -41,9 +41,6 @@ export class ActionComponent implements OnInit {
     //   this.sendTestResult(5, pageloadtime, 1);
     // }
 
-
-
-
     // window.onload = function () {
     //    console.log('start onload');
     //    let time = window.performance.timing;
@@ -60,150 +57,151 @@ export class ActionComponent implements OnInit {
  }
 
   operations = [
-       {
-          "label": "Tworzenie rekordów",
-          "isInput": true,
-          "dropdown": [1, 10, 100, 1000], 
-          "dropdownTitle": "Powtórzenia",
-          "amount": 0,
-          "phrase": ""
-       },
-       {
-         "label": "Zastąpienie rekordów nowymi wartościami",
-         "isInput": true,
-         "dropdown": [1, 10, 100, 1000], 
-         "dropdownTitle": "Powtórzenia",
-         "amount": 0,
-         "phrase": ""
-       },
-      {
-        "label": "Wyszukanie rekordów",
-        "isInput": false,
-        "dropdown": [1, 10, 100, 1000],
-        "dropdownTitle": "Powtórzenia",
-        "amount": 0,
-        "phrase": ""
-      },
-      {
-        "label": "Usunięcie rekordów",
-        "isInput": false,
-        "dropdown": [1, 10, 100, 1000],
-        "dropdownTitle": "Powtórzenia",
-        "amount": 0
-      },
-      {
-        "label": "Czytanie lokalizacji urządzenia",
-        "isInput": false,
-        "dropdown": [1, 10, 100, 1000],
-        "dropdownTitle": "Powtórzenia",
-        "amount": 0
-      },
-      {
-        "label": "Tworzenie Push Notification",
-        "isInput": true,
-        "dropdown": [1, 10, 100, 1000],
-        "dropdownTitle": "Powtórzenia",
-        "amount": 0
-      },
-      {
-        "label": "Umieszczanie danych w Local Storage",
-        "isInput": true,
-        "dropdown": [1, 10, 100, 1000],
-        "dropdownTitle": "Powtórzenia",
-        "amount": 0
-      },
-      {
-        "label": "Czytanie danych z Local Storage",
-        "isInput": true,
-        "dropdown": [1, 10, 100, 1000],
-        "dropdownTitle": "Powtórzenia",
-        "amount": 0
-      },
-      {
-        "label": "Ładowanie obrazu",
-        "isInput": false,
-        "dropdown": [1, 10, 100, 1000],
-        "dropdownTitle": "Powtórzenia",
-        "amount": 0
-      }
-    ];
-
-    togglePopup(text) {
-      this.showPopup = !this.showPopup;
-      this.popupText = text;
-      this.dialog.open(PopupComponent, {
-        data: {
-          text: text
-        }
-      });
+    {
+      "label": "Tworzenie rekordów",
+      "isInput": true,
+      "dropdown": [1, 10, 100, 1000], 
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0,
+      "phrase": ""
+    },
+    {
+      "label": "Zastąpienie rekordów nowymi wartościami",
+      "isInput": true,
+      "dropdown": [1, 10, 100, 1000], 
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0,
+      "phrase": ""
+    },
+    {
+      "label": "Wyszukanie rekordów",
+      "isInput": false,
+      "dropdown": [1, 10, 100, 1000],
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0,
+      "phrase": ""
+    },
+    {
+      "label": "Usunięcie rekordów",
+      "isInput": false,
+      "dropdown": [1, 10, 100, 1000],
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0
+    },
+    {
+      "label": "Czytanie lokalizacji urządzenia",
+      "isInput": false,
+      "dropdown": [1, 10, 100, 1000],
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0
+    },
+    {
+      "label": "Tworzenie Push Notification",
+      "isInput": true,
+      "dropdown": [1, 10, 100, 1000],
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0
+    },
+    {
+      "label": "Umieszczanie danych w Local Storage",
+      "isInput": true,
+      "dropdown": [1, 10, 100, 1000],
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0
+    },
+    {
+      "label": "Czytanie danych z Local Storage",
+      "isInput": true,
+      "dropdown": [1, 10, 100, 1000],
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0
+    },
+    {
+      "label": "Ładowanie obrazu",
+      "isInput": false,
+      "dropdown": [1, 10, 100, 1000],
+      "dropdownTitle": "Powtórzenia",
+      "amount": 0
     }
+  ];
 
-    validate(index, phrase, amount) {
-      var text = "";
-      this.getAllItems();//update the  items object so everywhere we have access to current state in database
-      //I need to know during the validation, just now, the current items list
-      //subscription will wait maybe 1 sec and then things can change, cause error
-      var max = Object.keys(this.items).length;
-      var isCorrect = true;
-      
-      if(amount === 0){ 
-        text += "Należy wybrać liczbę z listy. ";
-        isCorrect = false;
+  togglePopup(text) {
+    this.showPopup = !this.showPopup;
+    this.popupText = text;
+    this.dialog.open(PopupComponent, {
+      data: {
+        text: text
       }
+    });
+  }
 
-      if([1, 2, 3].includes(index) && amount > max){
-        text += "Wybrana liczba jest większa niż aktualna liczba wszstkich rekordów. ";
-        isCorrect = false;
-      }
-
-      if(this.operations[index].isInput && !phrase){
-        text += "Pole tekstowe nie może być puste. ";
-        isCorrect = false;
-      }
+  validate(index, phrase, amount) {
+    var text = "";
+    this.getAllItems();//update the  items object so everywhere we have access to current state in database
+    //I need to know during the validation, just now, the current items list
+    //subscription will wait maybe 1 sec and then things can change, cause error
+    var max = Object.keys(this.items).length;
+    var isCorrect = true;
     
-      if(!isCorrect){
-        this.togglePopup(text);
-      }
+    if(amount === 0){ 
+      text += "Należy wybrać liczbę z listy. ";
+      isCorrect = false;
+    }
+
+    if([1, 2, 3].includes(index) && amount > max){
+      text += "Wybrana liczba jest większa niż aktualna liczba wszstkich rekordów. ";
+      isCorrect = false;
+    }
+
+    if(this.operations[index].isInput && !phrase){
+      text += "Pole tekstowe nie może być puste. ";
+      isCorrect = false;
+    }
+  
+    if(!isCorrect){
+      this.togglePopup(text);
+    }
+  
+    return isCorrect;
+  }
+
+  submit(index){
+    event.preventDefault();
+    var phrase = this.operations[index].phrase;
+    var amount = this.operations[index].amount;
+    if(!this.validate(index, phrase, amount))
+      return;
     
-      return isCorrect;
-    }
+      switch(index){
+        case 0: this.createItems(phrase, amount); break;
+        case 1: this.updateItems(phrase, amount); break;
+        case 2: this.searchForItems(amount); break;
+        case 3: this.deleteItems(amount); break;
 
-    submit(index){
-      event.preventDefault();
-      var phrase = this.operations[index].phrase;
-      var amount = this.operations[index].amount;
-      if(!this.validate(index, phrase, amount))
-        return;
+        case 4: this.getLocation(amount); break;
+        case 5: this.pushNotification(phrase, amount); break;
+        case 6: this.setLocalStorage(phrase, amount); break;
+        case 7: this.searchLocalStorage(phrase, amount); break;
+        case 8: this.addTheImage(amount); break;
+        default: console.log("Uncorrect operation number");
+      }
+  }
+
+  getAllItems(){
+    this.service.getAll()
+    .subscribe(
+      data => {
+        // console.log('getAllItems successful ', data);
+        this.items = data;
+      },
+      error => {
+        console.log('getAllItems error :(', error);
+      }
+    );
+  }
       
-        switch(index){
-          case 0: this.createItems(phrase, amount); break;
-          case 1: this.updateItems(phrase, amount); break;
-          case 2: this.searchForItems(amount); break;
-          case 3: this.deleteItems(amount); break;
-
-          case 4: this.getLocation(amount); break;
-          case 5: this.pushNotification(phrase, amount); break;
-          case 6: this.setLocalStorage(phrase, amount); break;
-          case 7: this.searchLocalStorage(phrase, amount); break;
-          case 8: this.addTheImage(amount); break;
-          default: console.log("Uncorrect operation number");
-        }
-    }
-
-    getAllItems(){
-      this.service.getAll()
-      .subscribe(
-        data => {
-          // console.log('getAllItems successful ', data);
-          this.items = data;
-        },
-        error => {
-          console.log('getAllItems error :(', error);
-        }
-      );
-   }
-      
-    createItems(phrase, amount){
+/*   VERSION WITH SERVER'S RESPONSE TIME 
+      createItems(phrase, amount){
       console.log("Create many items");
       // let t0 = performance.now();
       var sum = 0;
@@ -221,7 +219,6 @@ export class ActionComponent implements OnInit {
             // console.log("Single response - create: ", t1 - t0, 'milliseconds');
             sum += t1 - t0;
             responsesReceived++;
-            // console.log(responsesReceived);
             if(responsesReceived === amount){//if we have all the responses yet
               console.log("Performance create item: ", sum/amount, 'milliseconds');
               this.sendTestResult(1, sum/amount, amount);
@@ -232,104 +229,103 @@ export class ActionComponent implements OnInit {
           }
         );
       }
-      // let t1 = performance.now();
-      // console.log("Performance create item: ", (t1 - t0)/amount, 'milliseconds');
-      // this.sendTestResult(1, (t1 - t0)/amount, amount);
     }
-    
-    updateItems(phrase, amount){
-      //to obliczenie, że co 10 np. to rób tutaj i stąd uderzaj w endpoint jak na pojedynczy, tylko ze w petli
-      // bo testujesz wydajnosc frontu, a jak zrobisz inaczej, to od serwera bd dokladnie wszystko zalezalo
-      //i tu to amount to bedzie konkretne id do zaktualizowania
-      //wyliczysz sobie, bo liczbe wszystkich rekordow w bazie bd przechowywala tez
-      //z tego zapytania GET tez skorzystaj i bd trzeba je tu trzymac na froncie w arrayu i id z nich pobierac do 
-      //kolejnych requestow uzytku
-      console.log("Update many items");
-      var sum = 0;
-      var responsesReceived = 0;
-      var postObject = {
-        name: phrase
-      }
-      for(let i = 0; i < amount; i++){
-        var id = this.items[i].item_id;
-        let t0 = performance.now();
-        this.service.update(id, postObject)
-        .subscribe(
-          data => {
-            // console.log('updateManyItems successful ', data);
-            let t1 = performance.now();
-            // console.log("Single response - update: ", t1 - t0, 'milliseconds');
-            sum += t1 - t0;
-            responsesReceived++;
-            // console.log(responsesReceived);
-            if(responsesReceived === amount){//if we have all the responses yet
-              console.log("Performance update item: ", sum/amount, 'milliseconds');
-              this.sendTestResult(2, sum/amount, amount);
-            }
-          },
-          error => {
-            console.log('updateManyItems error :(', error);
-          }
-        );
-      }
-    }
+*/
 
-    searchForItems(amount){
-      console.log("Search for items");
-      var sum = 0;
-      var responsesReceived = 0;
-      for(let i = 0; i < amount; i++){//I tackle amount here not on server side to test the speed on front
-        let id = this.drawId();
-        let t0 = performance.now();
-        this.service.get(id)
-        .subscribe(
-          data => {
-            // console.log("Found item = " + JSON.stringify(data));
-            let t1 = performance.now();
-            // console.log("Single response - search: ", t1 - t0, 'milliseconds');
-            sum += t1 - t0;
-            responsesReceived++;
-            // console.log(responsesReceived);
-            if(responsesReceived === amount){//if we have all the responses yet
-              console.log("Performance search item: ", sum/amount, 'milliseconds');
-              this.sendTestResult(3, sum/amount, amount);
-            }
-          },
-          error => {
-            console.log('searchForItem error :(', error);
-          }
-        );
+createItems(phrase, amount){
+  console.log("Create many items");
+  let t0 = performance.now();
+  for(let i = 0; i < amount; i++){//I tackle amount here not on server side to test the speed on front
+    var postObject = {
+      name: phrase
+    }
+    this.service.create(postObject)
+    .subscribe(
+      data => {
+        // console.log('createManyItems successful ', data);
+      },
+      error => {
+        console.log('createManyItems error :(', error);
       }
+    );
+  }
+  let t1 = performance.now();
+  console.log("Performance create item: ", (t1 - t0)/amount, 'milliseconds');
 
-    }
-    
-    deleteItems(amount){
-      console.log("Delete many items");
-      var sum = 0;
-      var responsesReceived = 0;
-      for(let i = 0; i < amount; i++){
-        var id = this.items[i].item_id;
-        let t0 = performance.now();
-        this.service.delete(id)
-        .subscribe(
-          data => {
-            // console.log(JSON.stringify(data));
-            let t1 = performance.now();
-            // console.log("Single response - delete: ", t1 - t0, 'milliseconds');
-            sum += t1 - t0;
-            responsesReceived++;
-            // console.log(responsesReceived);
-            if(responsesReceived === amount){//if we have all the responses yet
-              console.log("Performance delete item: ", sum/amount, 'milliseconds');
-              this.sendTestResult(4, sum/amount, amount);
-            }
-          },
-          error => {
-            console.log('deleteManyItems error :(', error);
-          }
-        );
+  this.sendTestResult(1, (t1 - t0)/amount, amount);
+}
+
+updateItems(phrase, amount){
+  //to obliczenie, że co 10 np. to rób tutaj i stąd uderzaj w endpoint jak na pojedynczy, tylko ze w petli
+  // bo testujesz wydajnosc frontu, a jak zrobisz inaczej, to od serwera bd dokladnie wszystko zalezalo
+  //i tu to amount to bedzie konkretne id do zaktualizowania
+  //wyliczysz sobie, bo liczbe wszystkich rekordow w bazie bd przechowywala tez
+  //z tego zapytania GET tez skorzystaj i bd trzeba je tu trzymac na froncie w arrayu i id z nich pobierac do 
+  //kolejnych requestow uzytku
+  console.log("Update many items");
+  let t0 = performance.now();
+  var postObject = {
+    name: phrase
+  }
+  for(let i = 0; i < amount; i++){
+    var id = this.items[i].item_id;
+    this.service.update(id, postObject)
+    .subscribe(
+      data => {
+        // console.log('updateManyItems successful ', data);
+      },
+      error => {
+        console.log('updateManyItems error :(', error);
       }
-    }
+    );
+  }
+  let t1 = performance.now();
+  console.log("Performance update item: ", (t1 - t0)/amount, 'milliseconds');
+
+  this.sendTestResult(2, (t1 - t0)/amount, amount);
+}
+
+searchForItems(amount){
+  console.log("Search for items");
+  let t0 = performance.now();
+  for(let i = 0; i < amount; i++){//I tackle amount here not on server side to test the speed on front
+    let id = this.drawId();
+    this.service.get(id)
+    .subscribe(
+      data => {
+        // console.log("Found item = " + JSON.stringify(data));
+      },
+      error => {
+        console.log('searchForItem error :(', error);
+      }
+    );
+  }
+  let t1 = performance.now();
+  console.log("Performance search for item: ", (t1 - t0)/amount, 'milliseconds');
+
+  this.sendTestResult(3, (t1 - t0)/amount, amount);
+}
+
+deleteItems(amount){
+  console.log("Delete many items");
+  let t0 = performance.now();
+  for(let i = 0; i < amount; i++){
+    var id = this.items[i].item_id;
+    this.service.delete(id)
+    .subscribe(
+      data => {
+        // console.log(JSON.stringify(data));
+      },
+      error => {
+        console.log('deleteManyItems error :(', error);
+      }
+    );
+  }
+  let t1 = performance.now();
+  console.log("Performance delete item: ", (t1 - t0)/amount, 'milliseconds');
+
+  this.sendTestResult(4, (t1 - t0)/amount, amount);
+}
 
     drawId(){
       //choose random index in range of items array size
